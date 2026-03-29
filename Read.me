@@ -1,162 +1,120 @@
-# 🚀 AWS Cost Optimization & Monitoring Setup (Terraform + Prometheus + Grafana)
+# 🚀 AWS DevOps Monitoring & Cost Optimization Project
 
 ## 📌 Overview
+This project demonstrates a **production-ready DevOps monitoring setup** using:
 
-This project demonstrates a **production-ready DevOps setup** where AWS infrastructure is provisioned using Terraform and integrated with a complete monitoring and alerting system.
+- Terraform (Infrastructure as Code)
+- AWS EC2 (Cost Optimized)
+- Docker (Containerized Monitoring Stack)
+- Prometheus (Metrics Collection)
+- Grafana (Visualization)
+- Loki (Log Aggregation)
+- AlertManager + Telegram (Real-time Alerts)
 
----
-
-## 🎯 Problem Statement
-
-Startups often face:
-
-* High AWS costs due to over-provisioned resources
-* No monitoring visibility
-* No alerting system → downtime risks
-
----
-
-## ⚙️ Solution
-
-Implemented a full DevOps system:
-
-* Infrastructure provisioning using **Terraform**
-* Cost optimization using **right-sized EC2**
-* Monitoring using **Prometheus + Grafana**
-* Logging using **Loki**
-* Alerting via **Telegram**
+👉 Fully automated using **user_data (zero manual setup)**
 
 ---
 
-## 🧱 Architecture
+## 🏗️ Architecture Diagram
 
-### 🔁 Flow:
+![Architecture](images/architecture.png)
 
-User → AWS EC2 → Docker → Monitoring Stack → Alerts
+### 🔹 Architecture Explanation
+- Terraform provisions:
+  - VPC
+  - Subnet
+  - Route Table
+  - Internet Gateway
+  - EC2 Instance
 
-### 🧩 Components:
+- EC2 runs Docker containers:
+  - Node Exporter → System metrics
+  - Prometheus → Metrics collection
+  - Grafana → Dashboards
+  - Loki → Logs
 
-* Terraform → Infra provisioning
-* AWS EC2 → Hosting server
-* Docker Compose → Service orchestration
-* Prometheus → Metrics collection
-* Node Exporter → System metrics
-* Grafana → Visualization
-* Loki → Logging
-* Telegram → Alerts
+- Alert Flow:
+  - Prometheus → AlertManager → Telegram
 
 ---
 
-## 🔍 Prometheus Configuration
+## ⚙️ Prometheus Configuration (Important)
+
+Prometheus is configured to scrape metrics from Node Exporter:
 
 ```yaml
-global:
-  scrape_interval: 15s
-
 scrape_configs:
-  - job_name: "prometheus"
+  - job_name: 'node-exporter'
     static_configs:
-      - targets: ["localhost:9090"]
+      - targets: ['node-exporter:9100']
 
-  - job_name: "node-exporter"
-    static_configs:
-      - targets: ["node-exporter:9100"]
-```
+🔹 What happens here?
+Prometheus pulls metrics every few seconds
+Node Exporter exposes:
+CPU usage
+Memory usage
+Disk I/O
+Network traffic
 
-### ⚙️ Explanation:
-
-* Collects metrics every 15 seconds
-* Monitors Prometheus + Node Exporter
-* Enables real-time infrastructure tracking
-
----
-
-## 📊 Features
-
-* Real-time monitoring (CPU, Memory, Disk, Network)
-* Pre-built Grafana dashboards
-* Alerting system (CPU, Memory, Disk)
-* Telegram alert notifications
-* Fully automated infra using Terraform
-
----
-
-## 🚨 Alerts Implemented
-
-* CPU Usage > 80%
-* Memory Usage > 80%
-* Disk Usage > 80%
-
----
-
-## 💰 Cost Optimization
-
-### Before:
-
-* EC2: t2.large (~$70/month)
-
-### After:
-
-* EC2: t2.micro (~$8–10/month)
-
-### Result:
-
-👉 **70–85% cost reduction**
-
----
-
-## 📸 Screenshots
-
-### 📊 Grafana Dashboard
-
-![Grafana](screenshots/grafana-dashboard.png)
-
----
-
-### 🎯 Prometheus Targets
-
-![Prometheus](screenshots/prometheus-targets.png)
-
----
-
-### 🐳 Docker Containers
-
-![Docker](screenshots/docker-containers.png)
-
----
-
-### ⚙️ Terraform Output
-
-![Terraform](screenshots/terraform-output.png)
-
----
-
-### 🚨 Telegram Alerts
+👉 This is the core of monitoring system
 
 
+📊 Grafana Dashboard
 
----
+🔹 Metrics Covered:
+CPU Usage
+Memory Usage
+Disk IOPS & Throughput
+Network Traffic
+System Uptime
 
-## 🚀 Deployment Steps
+👉 Real-time monitoring with visual insights
 
-```bash
+# 1. Clone repo
+git clone https://github.com/your-username/aws-devops-monitoring-terraform.git
+cd aws-devops-monitoring-terraform
+
+# 2. Initialize Terraform
 terraform init
-terraform apply
-```
 
----
+# 3. Apply Infrastructure
+terraform apply -auto-approve
 
-## 🧠 Key Achievements
+# 4. Access Services
+Grafana: http://<EC2-PUBLIC-IP>:3000
+Prometheus: http://<EC2-PUBLIC-IP>:9090
 
-* Automated AWS infrastructure
-* Reduced AWS cost significantly
-* Built real-time monitoring system
-* Implemented alerting with Telegram
-* Production-ready DevOps setup
+📂 Project Structure
 
----
+.
+├── main.tf
+├── provider.tf
+├── variables.tf
+├── output.tf
+├── docker-compose.yml
+├── prometheus.yml
+├── images/
+│   ├── architecture.png
+│   ├── grafana1.png
+│   ├── alert1.jpeg
+│   └── ...
 
-## 📬 Contact
+🎯 Key Highlights
 
-📧 Email: [adityarajawat0099@gmail.com](mailto:adityarajawat0099@gmail.com)
-💼 Open for freelance DevOps work
+✅ Infrastructure as Code (Terraform)
+✅ Fully Automated Setup (user_data)
+✅ Real-time Monitoring (Prometheus + Grafana)
+✅ Centralized Logging (Loki)
+✅ Alerting System (Telegram)
+✅ Cost Optimized Architecture
+
+👨‍💻 Author
+
+Adarsh Singh
+📧 adarshsinghrajawat75@gmail.com
+
+💼 DevOps Engineer | AWS | Terraform | Docker
+
+⭐ If you like this project
+
+Give it a ⭐ on GitHub and connect for DevOps work 🚀
