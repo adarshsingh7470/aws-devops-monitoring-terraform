@@ -1,0 +1,162 @@
+# 🚀 AWS Cost Optimization & Monitoring Setup (Terraform + Prometheus + Grafana)
+
+## 📌 Overview
+
+This project demonstrates a **production-ready DevOps setup** where AWS infrastructure is provisioned using Terraform and integrated with a complete monitoring and alerting system.
+
+---
+
+## 🎯 Problem Statement
+
+Startups often face:
+
+* High AWS costs due to over-provisioned resources
+* No monitoring visibility
+* No alerting system → downtime risks
+
+---
+
+## ⚙️ Solution
+
+Implemented a full DevOps system:
+
+* Infrastructure provisioning using **Terraform**
+* Cost optimization using **right-sized EC2**
+* Monitoring using **Prometheus + Grafana**
+* Logging using **Loki**
+* Alerting via **Telegram**
+
+---
+
+## 🧱 Architecture
+
+### 🔁 Flow:
+
+User → AWS EC2 → Docker → Monitoring Stack → Alerts
+
+### 🧩 Components:
+
+* Terraform → Infra provisioning
+* AWS EC2 → Hosting server
+* Docker Compose → Service orchestration
+* Prometheus → Metrics collection
+* Node Exporter → System metrics
+* Grafana → Visualization
+* Loki → Logging
+* Telegram → Alerts
+
+---
+
+## 🔍 Prometheus Configuration
+
+```yaml
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: "prometheus"
+    static_configs:
+      - targets: ["localhost:9090"]
+
+  - job_name: "node-exporter"
+    static_configs:
+      - targets: ["node-exporter:9100"]
+```
+
+### ⚙️ Explanation:
+
+* Collects metrics every 15 seconds
+* Monitors Prometheus + Node Exporter
+* Enables real-time infrastructure tracking
+
+---
+
+## 📊 Features
+
+* Real-time monitoring (CPU, Memory, Disk, Network)
+* Pre-built Grafana dashboards
+* Alerting system (CPU, Memory, Disk)
+* Telegram alert notifications
+* Fully automated infra using Terraform
+
+---
+
+## 🚨 Alerts Implemented
+
+* CPU Usage > 80%
+* Memory Usage > 80%
+* Disk Usage > 80%
+
+---
+
+## 💰 Cost Optimization
+
+### Before:
+
+* EC2: t2.large (~$70/month)
+
+### After:
+
+* EC2: t2.micro (~$8–10/month)
+
+### Result:
+
+👉 **70–85% cost reduction**
+
+---
+
+## 📸 Screenshots
+
+### 📊 Grafana Dashboard
+
+![Grafana](screenshots/grafana-dashboard.png)
+
+---
+
+### 🎯 Prometheus Targets
+
+![Prometheus](screenshots/prometheus-targets.png)
+
+---
+
+### 🐳 Docker Containers
+
+![Docker](screenshots/docker-containers.png)
+
+---
+
+### ⚙️ Terraform Output
+
+![Terraform](screenshots/terraform-output.png)
+
+---
+
+### 🚨 Telegram Alerts
+
+
+
+---
+
+## 🚀 Deployment Steps
+
+```bash
+terraform init
+terraform apply
+```
+
+---
+
+## 🧠 Key Achievements
+
+* Automated AWS infrastructure
+* Reduced AWS cost significantly
+* Built real-time monitoring system
+* Implemented alerting with Telegram
+* Production-ready DevOps setup
+
+---
+
+## 📬 Contact
+
+📧 Email: [adityarajawat0099@gmail.com](mailto:adityarajawat0099@gmail.com)
+💼 Open for freelance DevOps work
