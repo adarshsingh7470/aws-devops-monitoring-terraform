@@ -58,7 +58,6 @@ Network traffic
 
 👉 This is the core of monitoring system
 
-
 📊 Grafana Dashboard
 
 🔹 Metrics Covered:

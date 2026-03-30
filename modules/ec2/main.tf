@@ -1,54 +1,7 @@
-resource "aws_vpc" "main-vpc" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
-
-  tags = {
-    Name = "main-vpc"
-  }
-}
-
-resource "aws_subnet" "main-subnet" {
-  vpc_id                  = aws_vpc.main-vpc.id
-  cidr_block              = "10.0.1.0/24"
-  availability_zone       = "ap-south-1a"
-  map_public_ip_on_launch = true
-
-  tags = {
-    Name = "main-subnet"
-  }
-}
-
-resource "aws_internet_gateway" "igw" {
-  vpc_id = aws_vpc.main-vpc.id
-
-  tags = {
-    Name = "main-igw"
-  }
-}
-
-resource "aws_route_table" "rt" {
-  vpc_id = aws_vpc.main-vpc.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.igw.id
-  }
-
-  tags = {
-    Name = "main-rt"
-  }
-}
-
-resource "aws_route_table_association" "rta" {
-  subnet_id      = aws_subnet.main-subnet.id
-  route_table_id = aws_route_table.rt.id
-}
-
-
 resource "aws_security_group" "ec2-sg" {
-  name        = "${var.aws_instance}-security-group"
+  name        = "${var.instance_name}-security-group"
   description = "security group for ec2 instance"
-  vpc_id      = aws_vpc.main-vpc.id
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 22
@@ -84,25 +37,19 @@ resource "aws_security_group" "ec2-sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
 }
 
 resource "aws_key_pair" "my-key" {
   key_name   = "my-server-key"
-  public_key = file("${path.module}/.ssh/key.pub") # path to your .pub file
+  public_key = file("${path.root}/.ssh/key.pub")
 }
 
 resource "aws_instance" "my-server" {
   key_name               = aws_key_pair.my-key.key_name
-  ami                    = "ami-05d2d839d4f73aafb"
-  instance_type          = "t2.micro"
-  subnet_id              = aws_subnet.main-subnet.id
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  subnet_id              = var.subnet_id
   vpc_security_group_ids = [aws_security_group.ec2-sg.id]
-
-  depends_on = [
-    aws_internet_gateway.igw,
-    aws_route_table_association.rta
-  ]
 
   user_data = <<-EOF
 #!/bin/bash
