@@ -27,7 +27,7 @@ A production-ready DevOps infrastructure built using **Terraform**, integrated w
 
 ## 🧱 Architecture Diagram
 
-![Architecture](images/architecture.png)
+![Architecture](images/architecture.png.png)
 
 ### 🔹 Architecture Flow
 
@@ -97,18 +97,18 @@ Deployed using **Docker Compose**:
 
 ### 📸 Running Containers
 
-![Docker Containers](images/dockerContaimer.png)
+![Docker Containers](images/dockerContaimer.png.png)
 
 ---
 
 ## 📊 Grafana Dashboard
 
-![Dashboard 1](images/grafana1.png)
-![Dashboard 2](images/grafana2.png)
-![Dashboard 3](images/grafana3.png)
-![Dashboard 4](images/grafana4.png)
-![Dashboard 5](images/grafana5.png)
-![Dashboard 6](images/grafana6.png)
+![Dashboard 1](images/grafana1.png.png)
+![Dashboard 2](images/grafana2.png.png)
+![Dashboard 3](images/grafana3.png.png)
+![Dashboard 4](images/grafana4.png.png)
+![Dashboard 5](images/grafana5.png.png)
+![Dashboard 6](images/grafana6.png.png)
 
 ### 🔹 Metrics Covered
 
@@ -153,10 +153,10 @@ scrape_configs:
 
 ## 🚨 Alerting System (Telegram)
 
-![Alert 1](images/alert1.jpeg)
-![Alert 2](images/alert2.jpeg)
-![Alert 3](images/alert3.jpeg)
-![Alert 4](images/alert4.jpeg)
+![Alert 1](images/alert1.jpeg.jpeg)
+![Alert 2](images/alert2.jpeg.jpeg)
+![Alert 3](images/alert3.jpeg.jpeg)
+![Alert 4](images/alert4.jpeg.jpeg)
 
 ### 🔹 Alerts Configured
 
